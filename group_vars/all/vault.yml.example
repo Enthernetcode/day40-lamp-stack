@@ -1,0 +1,5 @@
+---
+# 1. cp vault.yml.example vault.yml
+# 2. set a real password below
+# 3. ansible-vault encrypt vault.yml
+vault_db_password: ChangeMeBeforeEncrypting

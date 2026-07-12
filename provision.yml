@@ -1,0 +1,16 @@
+---
+# OPTIONAL stretch goal — requires AWS credentials + boto3 on the control node.
+# Launches the disposable target VM. Otherwise create one manually and skip this.
+- name: Provision target instance
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Launch Ubuntu 24.04 instance
+      amazon.aws.ec2_instance:
+        name: day40-lamp-target
+        instance_type: t3.micro
+        image_id: ami-REPLACE-WITH-CURRENT-NOBLE-AMI
+        region: us-east-1
+        key_name: your-key
+        security_group: default
+        state: running

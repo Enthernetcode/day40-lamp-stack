@@ -1,0 +1,13 @@
+# Managed by Ansible — Day 40 LAMP capstone
+<VirtualHost *:{{ apache_port }}>
+    ServerName {{ inventory_hostname }}
+    DocumentRoot {{ web_root }}
+
+    <Directory {{ web_root }}>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/day40_error.log
+    CustomLog ${APACHE_LOG_DIR}/day40_access.log combined
+</VirtualHost>

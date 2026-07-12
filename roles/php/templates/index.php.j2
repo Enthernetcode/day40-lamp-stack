@@ -1,0 +1,11 @@
+<?php
+// Rendered by Ansible on {{ ansible_distribution }} {{ ansible_distribution_version }}
+// DEMO ONLY: credentials rendered into a page is not a production pattern.
+$conn = @new mysqli("localhost", "{{ db_user }}", "{{ db_password }}", "{{ db_name }}");
+?>
+<h1>Day 40 — LAMP Stack Deployed by Ansible</h1>
+<p>Host: {{ inventory_hostname }} ({{ ansible_distribution }} {{ ansible_distribution_version }})</p>
+<p>PHP version: <?php echo phpversion(); ?></p>
+<p>MySQL connection:
+<?php echo $conn->connect_error ? "FAILED — " . $conn->connect_error : "OK ✅"; ?>
+</p>

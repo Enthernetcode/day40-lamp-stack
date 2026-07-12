@@ -1,0 +1,14 @@
+---
+- name: Install PHP packages           # list-form again
+  ansible.builtin.apt:
+    name: "{{ php_packages }}"
+    state: present
+  notify: Restart Apache
+
+- name: Deploy verification page       # Day 31: facts rendered into the page
+  ansible.builtin.template:
+    src: index.php.j2
+    dest: "{{ web_root }}/index.php"
+    owner: www-data
+    group: www-data
+    mode: "0644"

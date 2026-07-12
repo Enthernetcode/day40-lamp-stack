@@ -1,0 +1,15 @@
+---
+- name: Fail fast on non-Debian targets
+  ansible.builtin.fail:
+    msg: "This playbook targets Debian/Ubuntu. Detected: {{ ansible_os_family }}"
+  when: ansible_os_family != "Debian"
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install base packages          # Day 37: module takes a list — give it the list
+  ansible.builtin.apt:
+    name: "{{ base_packages }}"
+    state: present

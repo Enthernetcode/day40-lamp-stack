@@ -1,0 +1,34 @@
+---
+- name: Deploy LAMP stack
+  hosts: webservers
+  become: true
+  force_handlers: true          # Day 36: handlers fire even if a later task fails
+
+  tasks:
+    - name: Deploy with recovery
+      block:
+        - name: Prepare server
+          ansible.builtin.import_role:
+            name: common
+
+        - name: Install and configure Apache
+          ansible.builtin.import_role:
+            name: apache
+
+        - name: Install PHP
+          ansible.builtin.import_role:
+            name: php
+
+        - name: Install and configure MySQL
+          ansible.builtin.import_role:
+            name: mysql
+
+      rescue:
+        - name: A failed deploy is still a failure   # Day 38: don't exit green
+          ansible.builtin.fail:
+            msg: "Deploy failed at: {{ ansible_failed_task.name }}"
+
+      always:
+        - name: Record deployment attempt
+          ansible.builtin.debug:
+            msg: "LAMP deploy attempt finished on {{ inventory_hostname }}"

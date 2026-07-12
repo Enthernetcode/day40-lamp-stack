@@ -1,0 +1,14 @@
+---
+web_root: /var/www/day40
+apache_port: 80
+db_name: day40db
+db_user: day40user
+db_password: "{{ vault_db_password }}"
+base_packages:
+  - git
+  - curl
+  - python3-pymysql   # required by community.mysql modules on the target
+php_packages:
+  - php
+  - libapache2-mod-php
+  - php-mysql
