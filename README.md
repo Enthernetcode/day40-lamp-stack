@@ -14,16 +14,12 @@
 - Day 39 collections + requirements.yml → community.mysql
 
 ## Run it
-1. Ubuntu 24.04 target VM; put its IP + key in inventory/hosts.ini
+1. Ubuntu 24.04 target VM; put 151.241.99.206 + key in inventory/hosts.ini
 2. cp group_vars/all/vault.yml.example group_vars/all/vault.yml
    → set a real password → ansible-vault encrypt group_vars/all/vault.yml
 3. ansible-galaxy collection install -r requirements.yml
 4. ansible-playbook -i inventory/hosts.ini site.yml --ask-vault-pass
 5. Run step 4 AGAIN → recap should show changed=0 (idempotency proof)
-6. curl http://YOUR.VM.IP/ → PHP version + "MySQL connection: OK"
+6. curl http://151.241.99.206/ → PHP version + "MySQL connection: OK"
 
-## Evidence checklist for the post
-- [ ] Screenshot: first run recap, failed=0
-- [ ] Screenshot: second run recap, changed=0
-- [ ] Screenshot/paste: curl output with MySQL OK
-- [ ] One real thing that broke, and the fix
+
